@@ -27,3 +27,13 @@ Browse to http://localhost
 ## Sample Documentation
 
 This uses a very simple [OpenAPI](https://swagger.io/specification/) sample specification found [here](https://swagger.io/docs/specification/basic-structure/)
+
+## Notes
+
+As stated above, the list of env variables is a bit confusing. After learning a bit more about how the options work, this docker command using the prebuilt swagger-ui docker image using the following command
+
+```
+docker run -p 80:8080 -e SWAGGER_JSON=/docs/example.yml -e LAYOUT="BaseLayout" -v "$(pwd)"/docs:/docs swaggerapi/swagger-ui
+```
+
+Also remember to clear the browser cache in between making changes to the docker setup.
