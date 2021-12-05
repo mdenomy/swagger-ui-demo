@@ -5,10 +5,8 @@ Adapted from https://github.com/swagger-api/swagger-ui/blob/master/Dockerfile
 
 ## Layout and Swagger Configuration
 
-Swagger UI has a confusing set of environment variables and options. Out of the box it displays an explorer bar to load new OpenAPI specs and also loads a default example of a PetStore. Used these [instructions](https://github.com/swagger-api/swagger-ui/blob/212396f24d0d0f072d06c6af71087d6fddef9134/README.md#topbar-plugin) to find the right incantation of ENV variables and changes to index.html to display the base layout with the desired example docs loaded on start
-
-* Set the LAYOUT environment variable to `BaseLayout`
-* Set API_URL to `docs/example.yml` as opposed to setting SWAGGER_JSON (Not having API_URL caused the default petstore to show up)
+* Set the LAYOUT environment variable to `BaseLayout`. This removes the Explore bar to change the spec
+* Set API_URL to `docs/example.yml` as opposed to setting SWAGGER_JSON (Not having API_URL seemd to cause the default petstore to show up)
 
 ## Usage
 
@@ -28,12 +26,4 @@ Browse to http://localhost
 
 This uses a very simple [OpenAPI](https://swagger.io/specification/) sample specification found [here](https://swagger.io/docs/specification/basic-structure/)
 
-## Notes
-
-As stated above, the list of env variables is a bit confusing. After learning a bit more about how the options work, this docker command using the prebuilt swagger-ui docker image using the following command
-
-```
-docker run -p 80:8080 -e SWAGGER_JSON=/docs/example.yml -e LAYOUT="BaseLayout" -v "$(pwd)"/docs:/docs swaggerapi/swagger-ui
-```
-
-Also remember to clear the browser cache in between making changes to the docker setup.
+Remember to clear the browser cache in between making changes to the docker setup.

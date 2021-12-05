@@ -1,31 +1,10 @@
-# Adapted from https://github.com/swagger-api/swagger-ui/blob/master/Dockerfile
-# Looking for information on environment variables?
-# We don't declare them here — take a look at our docs.
-# https://github.com/swagger-api/swagger-ui/blob/master/docs/usage/configuration.md
+# The swagger-ui image uses nginx and swagger to render OpenAPI docs
+FROM swaggerapi/swagger-ui
 
-FROM nginx:1.19-alpine
-
-RUN apk --no-cache add nodejs
-
+# Configure swagger
 ENV API_KEY "**None**"
 ENV API_URL "docs/example.yml"
 ENV PORT 8080
 ENV LAYOUT="BaseLayout"
 
-COPY ./docker/nginx.conf ./docker/cors.conf /etc/nginx/
-
-# copy swagger files to the `/js` folder
-COPY ./dist/* /usr/share/nginx/html/
 COPY ./docs /usr/share/nginx/html/docs
-COPY ./docker/run.sh /usr/share/nginx/
-COPY ./docker/configurator /usr/share/nginx/configurator
-
-RUN chmod +x /usr/share/nginx/run.sh && \
-    chmod -R a+rw /usr/share/nginx && \
-    chmod -R a+rw /etc/nginx && \
-    chmod -R a+rw /var && \
-    chmod -R a+rw /var/run
-
-EXPOSE 8080
-
-CMD ["sh", "/usr/share/nginx/run.sh"]
