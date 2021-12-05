@@ -1,8 +1,6 @@
 # swagger-ui-demo
 Demo of running swagger ui for OpenAPI docs
 
-Adapted from https://github.com/swagger-api/swagger-ui/blob/master/Dockerfile
-
 ## Layout and Swagger Configuration
 
 * Set the LAYOUT environment variable to `BaseLayout`. This removes the Explore bar to change the spec
